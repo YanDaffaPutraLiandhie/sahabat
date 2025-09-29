@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Flashcard Page</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#db0247;
+      --pink-700:#e3175a;
+      --soft-pink:#ffd7e6;
+      --muted:#9b9b9b;
+      --bg:#fff;
+      --shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:#fafafa;
+      color:#111;
+    }
+    .container{
+      max-width:900px;
+      margin:0 auto;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      background:#fff;
+    }
+
+    /* HEADER */
+    .header{
+      background: linear-gradient(180deg,var(--pink) 0%, var(--pink-700) 100%);
+      padding:20px;
+      color:#fff;
+      position:fixed;
+      top:0;left:0;right:0;
+      width:100%;max-width:900px;
+      margin:auto;
+      z-index:10;
+    }
+    .header-main{
+      display:flex;justify-content:space-between;align-items:center;
+    }
+    .greeting{font-weight:600;font-size:18px;}
+    .greeting small{display:block;font-weight:300;font-size:13px;opacity:.95}
+    .bell{
+      width:42px;height:42px;background:rgba(255,255,255,0.12);
+      border-radius:10px;display:flex;align-items:center;justify-content:center;
+    }
+
+    /* tombol back */
+    .back-btn{
+      width:42px;height:42px;background:rgba(255,255,255,0.12);
+      border:none;border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:18px;cursor:pointer;
+      margin-right:10px;
+    }
+
+    .header-search{
+      margin-top:16px;display:flex;gap:10px;align-items:center;
+    }
+    .search{
+      flex:1;background:#fff;padding:12px 14px;border-radius:12px;
+      display:flex;align-items:center;gap:10px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+    .search input{border:0;outline:0;font-size:14px;width:100%;}
+    .filter-btn{
+      width:44px;height:44px;background:rgba(255,255,255,0.12);
+      border-radius:12px;display:flex;align-items:center;justify-content:center;
+    }
+
+    /* MAIN CONTENT */
+    .main-content{
+      flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+      padding:32px 24px 120px 24px;
+      margin-top:130px; /* jarak supaya tidak ketimpa header */
+    }
+
+    /* Categories */
+    .title-row{display:flex;justify-content:space-between;align-items:center;margin:6px 4px 14px;}
+    .title-row h3{margin:0;font-size:18px;}
+    .title-row a{color:var(--pink-700);font-size:13px;text-decoration:none;font-weight:500;}
+    .categories{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+    .cat{
+      background:#fff;border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,0.06);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:22px 10px;gap:10px;cursor:pointer;
+    }
+    .cat-icon{
+      width:44px;height:44px;background:rgba(255,45,111,0.1);
+      border-radius:12px;display:flex;align-items:center;justify-content:center;
+      color:var(--pink);font-size:22px;
+    }
+    .cat span{font-size:13px;color:#333;font-weight:500;}
+
+    /* BOTTOM NAV */
+    .bottom-nav{
+      height:74px;background:#fcfcfc;border-top-left-radius:24px;border-top-right-radius:24px;
+      display:flex;align-items:center;justify-content:space-around;
+      box-shadow:0 -6px 24px rgba(0,0,0,0.06);position:fixed;bottom:0;left:0;right:0;
+      max-width:900px;margin:auto;z-index:20;
+    }
+    .nav-item{
+      display:flex;flex-direction:column;align-items:center;
+      font-size:12px;color:var(--muted);gap:6px;
+      background:none;border:none;cursor:pointer;
+    }
+    .nav-item svg{width:28px;height:28px;fill:var(--muted);transition:.3s;}
+    .nav-item.active{color:var(--pink);font-weight:600;}
+    .nav-item.active svg{fill:var(--pink);}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-main">
+        <!-- tombol back -->
+        <button class="back-btn" onclick="location.href='home.html'">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div class="greeting">
+          <div>Flashcard Page</div>
+        </div>
+        <div class="bell"><i class="fa-solid fa-bell"></i></div>
+      </div>
+      <div class="header-search">
+        <div class="search"><i class="fa-solid fa-magnifying-glass"></i> <input type="search" placeholder="Search"/></div>
+        <div class="filter-btn"><i class="fa-solid fa-sliders"></i></div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="title-row">
+        <h3>Categories</h3><a href="#">See All</a>
+      </div>
+
+      <!-- Categories Grid -->
+      <div class="categories">
+
+        <!-- Remaja -->
+        <div class="cat">
+          <div class="cat-icon">
+           <img src="fremaja.png" alt sizes="80" style="width:80px;height:80px;">
+          </div>
+          <span>Remaja</span>
+        </div>
+
+        <!-- Usia Siap Menikah -->
+        <div class="cat">
+          <div class="cat-icon">
+          <img src="siapnikah.png" alt sizes="80" style="width:80px;height:80px;">
+          </div>
+          <span>Usia Siap Menikah</span>
+        </div>
+
+        <!-- Ibu Hamil -->
+        <div class="cat" onclick="window.location='flashcard1.html'">
+          <div class="cat-icon">
+            <img src="ibuhamil.png" alt sizes="80" style="width:80px;height:80px;">
+          </div>
+          <span>Ibu Hamil</span>
+        </div>
+
+        <!-- Ibu Nifas -->
+        <div class="cat">
+          <div class="cat-icon">
+            <img src="siapnikah.png" alt sizes="80" style="width:80px;height:80px;">
+          </div>
+          <span>Ibu Nifas</span>
+        </div>
+
+        <!-- Ibu Menyusui -->
+        <div class="cat">
+          <div class="cat-icon">
+          <img src="ibumenyusui.png" alt sizes="80" style="width:80px;height:80px;">
+          </div>
+          <span>Ibu Menyusui</span>
+        </div>
+
+        <!-- Menopause -->
+        <div class="cat">
+          <div class="cat-icon">
+           <img src="menopause.png" alt sizes="80" style="width:80px;height:80px;">
+          </div>
+          <span>Menopause</span>
+        </div>
+
+      </div><!-- end categories -->
+
+    </div><!-- end main content -->
+
+    <!-- NAVBAR -->
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="window.location='profile.html'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2V19.2c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+        <div>Profile</div>
+      </button>
+      <button class="nav-item active" onclick="window.location='home.html'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-12v-9h-3l9-8z"/></svg>
+        <div>Home</div>
+      </button>
+      <button class="nav-item" onclick="window.location='chat.html'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+        <div>Chat</div>
+      </button>
+    </nav>
+  </div>
+</body>
+</html>
